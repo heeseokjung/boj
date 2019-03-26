@@ -62,7 +62,6 @@ int main()
     }
 
     printf("%d\n", parent.size());
-    
 
     return 0;
 }
