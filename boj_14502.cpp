@@ -15,9 +15,12 @@ int n, m;
 int map[9][9];
 int num_safe = 0, max_safe = 0;
 vector<pair<int, int> > src;
+vector<pair<int, int> > empty_to_wall;
+vector<pair<int, int> > empty_space;
+bool dfs_visit[64];
 
 int virus();
-void run(int cnt, pair<int, int> cur);
+void run(int cnt, int cur);
 
 int main()
 {
@@ -25,14 +28,18 @@ int main()
     for(int i = 1; i <= n; ++i) {
         for(int j = 1; j <= m; ++j) {
             scanf("%d", &map[i][j]);
-            if(map[i][j] == EMPTY)
+            if(map[i][j] == EMPTY) {
                 num_safe++;
+                empty_space.push_back(make_pair(i, j));
+            }
             else if(map[i][j] == VIRUS)
                 src.push_back(make_pair(i, j));
         }
     }
+    for(int i = 0; i < empty_space.size(); ++i)
+        dfs_visit[i] = false;
 
-    run(0, make_pair(1, 1));
+    run(0, 0);
 
     printf("%d\n", max_safe);
 
@@ -49,6 +56,10 @@ int virus()
     for(int i = 1; i <= n; ++i) {
         for(int j = 1; j <= m; ++j)
             tmp_map[i][j] = map[i][j];
+    }
+    for(int i = 0; i < empty_to_wall.size(); ++i) {
+        pair<int, int> p = empty_to_wall[i];
+        tmp_map[p.first][p.second] = WALL;
     }
 
     int virus_spread = 0;
@@ -77,22 +88,22 @@ int virus()
     return virus_spread;
 }
 
-void run(int cnt, pair<int, int> cur)
+void run(int cnt, int cur)
 {
     if(cnt == 3) {
         int virus_spread = virus();
-        if(max_safe < num_safe - virus_spread) {
-            max_safe = num_safe - virus_spread;
-            return;
-        }
+        if(max_safe < num_safe - virus_spread - 3 + src.size()) 
+            max_safe = num_safe - virus_spread - 3 + src.size();
+        return;
     }
-    for(int i = cur.first; i <= n; ++i) {
-        for(int j = cur.second; j <= m; ++j) {
-            if(map[i][j] == EMPTY) {
-                map[i][j] = WALL;
-                run(cnt + 1, make_pair(i, j));
-                map[i][j] = EMPTY;
-            }
+    for(int i = cur; i < empty_space.size(); ++i) {
+        if(!dfs_visit[i]) {
+            dfs_visit[i] = true;
+            pair<int, int> p = empty_space[i];
+            empty_to_wall.push_back(make_pair(p.first, p.second));
+            run(cnt + 1, i);
+            empty_to_wall.pop_back();
+            dfs_visit[i] = false;
         }
     }
 }
