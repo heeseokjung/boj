@@ -44,14 +44,6 @@ int main()
 
 int calculate_flow()
 {
-    //debug
-    /*
-    for(int i = 0; i < s.size(); ++i) {
-        printf("%d-%d, ", s[i].first, s[i].second);
-    }
-    printf("\n");
-    */
-
     // find min capacity
     int min_capacity = 1000;
     for(int i = 0; i < (int)s.size(); ++i) {
@@ -90,12 +82,7 @@ void dfs(int src, int sink)
 
 void run()
 {
-    while(true) {
-        dfs(get_idx('A'), get_idx('Z'));
-
-        if(s.empty())
-            break;
-    }
+    dfs(get_idx('A'), get_idx('Z'));
 
     printf("%d\n", max_flow);
 }
