@@ -1,5 +1,3 @@
-// boj_1065
-
 #include <cstdio>
 
 using namespace std;

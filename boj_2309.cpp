@@ -1,5 +1,3 @@
-// boj_2309
-
 #include <cstdio>
 #include <algorithm>
 

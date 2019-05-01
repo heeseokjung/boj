@@ -1,5 +1,3 @@
-// boj_6086
-
 #include <cstdio>
 #include <utility>
 #include <vector>

@@ -1,5 +1,3 @@
-// boj_3085
-
 #include <cstdio>
 #include <queue>
 

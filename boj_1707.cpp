@@ -1,5 +1,3 @@
-// boj_1707
-
 #include <cstdio>
 #include <stdlib.h>
 #include <vector>

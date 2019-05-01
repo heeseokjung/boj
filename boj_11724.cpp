@@ -1,5 +1,3 @@
-// boj_11724
-
 #include <stdio.h>
 #include <vector>
 #include <queue>

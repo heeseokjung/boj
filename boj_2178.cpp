@@ -1,5 +1,3 @@
-// boj_2178
-
 #include <stdio.h>
 #include <utility>
 #include <queue>

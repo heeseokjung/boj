@@ -1,5 +1,3 @@
-// boj_1922 (Kruskal)
-
 #include <cstdio>
 #include <utility>
 #include <map>

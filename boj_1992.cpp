@@ -1,5 +1,3 @@
-// boj_1992
-
 #include <cstdio>
 #include <utility>
 

@@ -1,5 +1,3 @@
-// boj_1120
-
 #include <cstdio>
 #include <iostream>
 #include <string>

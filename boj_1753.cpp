@@ -1,5 +1,3 @@
-// boj_1753
-
 #include <cstdio>
 #include <string.h>
 #include <utility>

@@ -1,5 +1,3 @@
-// boj_6549
-
 #include <cstdio>
 #include <vector>
 #include <stack>

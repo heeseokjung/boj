@@ -1,5 +1,3 @@
-// boj_1074
-
 #include <cstdio>
 #include <utility>
 #include <stdlib.h>

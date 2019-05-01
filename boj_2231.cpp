@@ -1,5 +1,3 @@
-// boj_2231
-
 #include <stdio.h>
 
 int N;
