@@ -13,9 +13,12 @@ void Union(int v1, int v2);
 
 int Find(int v)
 {
-    while(disjoint[v] > 0)
-        v = disjoint[v];
-    return v;
+    int u = v;
+    while(disjoint[u] > 0)
+        u = disjoint[u];
+    if(disjoint[v] > 0)
+        disjoint[v] = u;
+    return u;
 }
 
 void Union(int v1, int v2)
