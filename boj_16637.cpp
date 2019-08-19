@@ -4,9 +4,9 @@ using namespace std;
 
 int N;
 int num_size = 0, op_size = 0;
-long long num[19];
+int num[19];
 char op[19];
-long long ans = -1;
+int ans = -1;
 
 void input()
 {
@@ -22,7 +22,7 @@ void input()
 	}
 }
 
-long long calculate(long long a, long long b, char op)
+int calculate(int a, int b, char op)
 {
 	switch(op) {
 		case '+':
@@ -34,13 +34,13 @@ long long calculate(long long a, long long b, char op)
 	}
 }
 
-void dfs(int pos, long long val)
+void dfs(int pos, int val)
 {
 	if(pos >= op_size) {
 		ans = max(ans, val);
 		return;
 	}
-	long long next_val;
+	int next_val;
 	if(pos + 1 < op_size) {
 		next_val = calculate(num[pos+1], num[pos+2], op[pos+1]);
 		next_val = calculate(val, next_val, op[pos]);
@@ -53,7 +53,7 @@ void dfs(int pos, long long val)
 void run()
 {
 	dfs(0, num[0]);
-	printf("%lld\n", ans);
+	printf("%d\n", ans);
 }
 
 int main()
