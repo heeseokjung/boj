@@ -6,7 +6,7 @@ int N;
 int num_size = 0, op_size = 0;
 char op[19];
 long long num[19];
-long long ans = -1;
+long long ans = -2e15;
 
 void input()
 {
