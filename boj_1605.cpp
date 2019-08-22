@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <string.h>
+#include <algorithm>
+using namespace std;
 
 int N;
 char str[200010];
 int RA[200010], tmpRA[200010];
 int SA[200010], tmpSA[200010];
 int cnt[200010];
+int prevSA[200010];
+int maxLCP = 0;
 
 void input()
 {
@@ -50,9 +54,28 @@ void buildSA()
     }
 }
 
+void getLCP()
+{
+	prevSA[SA[0]] = -1;
+	for(int i = 1; i < N; ++i)
+		prevSA[SA[i]] = SA[i-1];
+	int L = 0, j;
+	for(int i = 0; i < N; ++i) {
+		if(prevSA[i] == -1)
+			continue;
+		j = prevSA[i];
+		while(i+L < N && j+L < N && str[i+L] == str[j+L])
+			++L;
+		maxLCP = max(maxLCP, L);
+		L = (L - 1 < 0) ? 0 : L - 1;
+	}
+}
+
 void run()
 {
     buildSA();
+	getLCP();
+	printf("%d\n", maxLCP);
 }
 
 int main()
