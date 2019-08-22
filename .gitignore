@@ -1,5 +1,5 @@
 # ignore binary file
 *.out
 
-# ignore vscode setting file
-*.vscode
+# ignore vscode setting folder
+.vscode/
