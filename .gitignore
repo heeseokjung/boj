@@ -2,4 +2,4 @@
 *.out
 
 # ignore vscode setting file
-.vscode
+*.vscode
