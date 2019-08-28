@@ -1,59 +1,48 @@
-#include <cstdio>
+#include <stdio.h>
 #include <vector>
 #include <algorithm>
-
 using namespace std;
 
-int num_house, num_router;
-vector<int> house;
+int N, C;
+vector<int> v;
+int ans = 2e9;
 
-int run();
+void input()
+{
+    scanf("%d %d", &N, &C);
+    v.reserve(N);
+    for(int i = 0, j; i < N; ++i) {
+        scanf("%d", &j);
+        v.push_back(j);
+    }
+}
+
+void run()
+{
+    sort(v.begin(), v.end());
+    int i = 1, j = v.back() - v.front() + 1;
+    while(i < j) {
+        int m = (i + j) / 2;
+        int p = 0, cnt = 1;
+        for(int k = 0; k < (int)v.size(); ++k) {
+            if(v[k] - v[p] >= m) {
+                ++cnt;
+                p = k;
+            }
+        }
+        if(cnt >= C) {
+            ans = m;
+            i = m + 1;
+        } else {
+            j = m;
+        }
+    }
+    printf("%d\n", ans);
+}
 
 int main()
 {
-    scanf("%d %d", &num_house, &num_router);
-    house.reserve(num_house);
-    int location;
-    for(int i = 0 ; i < num_house; ++i) {
-        scanf("%d", &location);
-        house.push_back(location);
-    }
-
-    sort(house.begin(), house.end());
-
-    int max_dist = run();
-
-    printf("%d\n", max_dist);
-    
+    input();
+    run();
     return 0;
-}
-
-int run()
-{
-    int p = 1;
-    int r = house.back() - house.front();
-    int q;
-    int max_dist;
-
-    while(p < r) {
-        q = (p + r) / 2;
-        int count = 1;
-        int prev = 0;
-        for(int i = 0; i < (int)house.size(); ++i) {
-            if(house[i] - house[prev] >= q) {
-                count++;
-                prev = i;
-            }
-        }
-
-        if(count >= num_router) {
-            max_dist = q;
-            p = q + 1;
-        }
-        else {
-            r = q;
-        }
-    }
-
-    return max_dist;
 }
