@@ -1,9 +1,5 @@
-/*
- * Implements Fenwick Tree API
- */
-
+// Implements Fenwick Tree API
 #include <vector>
-
 using namespace std;
 
 template <typename T>

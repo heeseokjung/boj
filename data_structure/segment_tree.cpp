@@ -6,7 +6,6 @@
 
 #include <vector>
 #include <cmath>
-
 using namespace std;
 
 #define INF 1000000000

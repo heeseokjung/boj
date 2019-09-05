@@ -4,7 +4,7 @@
  *             : returns v's root
  * Union(int v1, int v2) : v1, v2 are node
  *                       : get roots of v1, v2 and union
-*/
+ */
 
 int disjoint[100001];
 
