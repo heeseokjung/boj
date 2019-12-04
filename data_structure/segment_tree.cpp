@@ -60,7 +60,7 @@ T SegmentTree<T>::init_tree_sum(T* arr, int i, int n, int j)
 template <typename T>
 T SegmentTree<T>::min_query(int n, int i, int j, int l, int r)
 {
-    if(i < r || j < l)
+    if(i > r || j < l)
         return INF;
     if(l <= i && j <= r)
         return tree[n];
@@ -72,7 +72,7 @@ T SegmentTree<T>::min_query(int n, int i, int j, int l, int r)
 template <typename T>
 T SegmentTree<T>::sum_query(int n, int i, int j, int l, int r)
 {
-    if(i < r || j < l)
+    if(i > r || j < l)
         return 0;
     if(l <= i && j <= r)
         return tree[n];
