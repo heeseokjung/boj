@@ -35,14 +35,12 @@ int main() {
         } else {
             x = x*10 + (exp[i] - '0');
         }
-        //cout << "i: " << i << "x: " << x << endl;
     }
     if(open)
         s.push(x);
     else
         ans += x;
     while(!s.empty()) {
-        //cout << "s.top(): " << s.top() << endl;
         ans -= s.top();
         s.pop();
     }
