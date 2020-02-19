@@ -5,7 +5,7 @@ using namespace std;
 
 int N, K, M;
 bool visit[101010];
-int dist[100001];
+int dist[101010];
 vector<int> adj[101010];
 
 int main() {
@@ -27,7 +27,6 @@ int main() {
             break;
         int size = (int)adj[u].size();
         for(int i = 0; i < size; ++i) {
-            //printf("size: %d i: %d\n",size,  i);
             int v = adj[u][i];
             if(!visit[v]) {
                 visit[v] = true;
@@ -37,7 +36,5 @@ int main() {
         }
     }
     printf("%d\n", visit[N] ? dist[N] + 1 : -1);
-    for(int i = 1; i <= N; ++i)
-        printf("size[%d]: %d\n", i, (int)adj[i].size());
     return 0;
 }
