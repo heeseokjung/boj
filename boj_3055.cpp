@@ -3,7 +3,6 @@
 #include <string>
 #include <queue>
 using namespace std;
-#include <cstdio>
 
 int R, C;
 int dr[4] = {-1, 1, 0, 0};
