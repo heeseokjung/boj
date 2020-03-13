@@ -61,32 +61,20 @@ void insert_back(Node* x, Node* y) {
     x->next->prev = x;
 }
 
-void printAll() {
-    Node* p = head;
-    for(int i = 0; i < N; ++i) {
-        printf("%d ", p->id);
-        p = p->next;
-    }
-    printf("\n");
-}
-
 void runcmd() {
     for(int i = 0; i < M; ++i) {
         char c = cmd[i].first;
         int x = cmd[i].second.first;
         int y = cmd[i].second.second;
-        //printf("<%c x: %d y: %d> ", c, x, y);
         switch(c) {
             case 'A': {
                 Node* p = remove(pos[x]);
                 insert_front(p, pos[y]);
-                //printAll();
                 break;
             }
             case 'B': {
                 Node* p = remove(pos[x]);
-                insert_back(p, pos[y]); 
-                //printAll();
+                insert_back(p, pos[y]);
                 break;
             }
             default: 
@@ -117,7 +105,6 @@ int main() {
     int mx = 0, k;
     Node* p = head;
     for(int i = 0; i < N; ++i) {
-        //printf("x: %d\n", p->id);
         int d = (int)(upper_bound(dp, dp + N, p->id) - dp);
         dp[d] = p->id;
         past[p->id] = dp[d-1];
@@ -128,19 +115,12 @@ int main() {
 
     vector<int> v;
     int x = dp[mx];
-    //printf("x: %d past[x]: %d\n", x, past[x]);
     while(x) {
-        //printf("x: %d\n", x);
         valid[x] = true;
         v.push_back(x);
         x = past[x];
     }
     reverse(v.begin(), v.end());
-    /*
-    for(int i = 0; i < (int)v.size(); ++i)
-        printf("%d ", v[i]);
-    printf("\n");
-    */
 
     printf("%d\n", k);
     int i = 0, j = 1;
@@ -157,5 +137,6 @@ int main() {
         end = j;
         ++j;
     }
+    
     return 0;
 }
