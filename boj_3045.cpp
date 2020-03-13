@@ -105,7 +105,7 @@ int main() {
     int mx = 0, k;
     Node* p = head;
     for(int i = 0; i < N; ++i) {
-        int d = (int)(upper_bound(dp, dp + N, p->id) - dp);
+        int d = (int)(lower_bound(dp, dp + N, p->id) - dp);
         dp[d] = p->id;
         past[p->id] = dp[d-1];
         mx = (mx < d) ? d : mx;
@@ -137,6 +137,6 @@ int main() {
         end = j;
         ++j;
     }
-    
+
     return 0;
 }
