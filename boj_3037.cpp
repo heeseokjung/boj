@@ -10,8 +10,6 @@ int main() {
     scanf("%d %d", &N, &C);
     dp[1][0] = 1LL;
     for(int i = 2; i <= N; ++i) {
-        for(int j = 0; j <= C; ++j)
-            rsum[j] = 0;
         for(int j = 0; j <= C; ++j) {
             if(j == 0)
                 rsum[j] = dp[i-1][j];
@@ -19,9 +17,9 @@ int main() {
                 rsum[j] = (rsum[j-1] + dp[i-1][j])%mod;
         }
         for(int j = 0; j <= C; ++j) {
-            dp[i][j] = (dp[i][j] + rsum[j])%mod;
+            dp[i][j] = rsum[j];
             if(j > i-1)
-                dp[i][j] = (dp[i][j] - dp[i-1][j-i] + mod)%mod;
+                dp[i][j] = (dp[i][j] - rsum[j-i] + mod)%mod;
         }
     }
     printf("%lld\n", dp[N][C]);
