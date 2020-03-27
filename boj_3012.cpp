@@ -5,7 +5,6 @@ using namespace std;
 
 int N;
 long long cache[200][200];
-bool carry[200][200];
 string s;
 #define mod 100000
 
