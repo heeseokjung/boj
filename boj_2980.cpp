@@ -20,7 +20,10 @@ int main() {
         time++;
         if(road[i].first == 0 && road[i].second == 0)
             continue;
+        if(time % (road[i].first + road[i].second) < road[i].first) 
+            time += road[i].first - (time % (road[i].first + road[i].second));
     }
+    printf("%d\n", time);
 
     return 0;
 }
