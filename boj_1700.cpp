@@ -45,6 +45,7 @@ int main() {
             s.erase(p);
             s.insert(v[i]);
             power[v[i]] = true;
+            
             count++;
         }
     }
