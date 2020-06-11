@@ -1,62 +1,44 @@
-#include <stdio.h>
+#include <cstdio>
 #include <utility>
 #include <vector>
-#include <queue>
-#include <algorithm>
 using namespace std;
 
 int N, M;
 vector<pair<int, int> > adj[501];
-int is_queue[501];
-int cnt[501];
-int dist[501];
-#define INF 1e9
+long long dist[501];
+const long long inf = (int)1e10;
 
-void input()
-{
+int main() {
 	scanf("%d %d", &N, &M);
-	int u, v, w;
 	for(int i = 0; i < M; ++i) {
+		int u, v, w;
 		scanf("%d %d %d", &u, &v, &w);
-		adj[u].push_back(pair<int, int>(v, w));
+		adj[u].push_back({v, w});
 	}
-}
 
-void run()
-{
 	for(int i = 1; i <= N; ++i)
-		dist[i] = INF;
-	
-	dist[1] = 0; is_queue[1] = true; cnt[1]++;
-	queue<int> q;
-	q.push(1);
-	while(!q.empty()) {
-		int u = q.front();
-		q.pop();
-		is_queue[u] = false;
-		for(int i = 0; i < (int)adj[u].size(); ++i) {
-			int v = adj[u][i].first, w = adj[u][i].second;
-			if(dist[v] > dist[u] + w) {
-				dist[v] = dist[u] + w;
-				if(!is_queue[v]) {
-					if(++cnt[v] >= N) {
+		dist[i] = inf;
+
+	dist[1] = 0;
+	for(int i = 0; i < N; ++i) {
+		for(int u = 1; u <= N; ++u) {
+			for(pair<int, int> p : adj[u]) {
+				int v = p.first;
+				long long w = (long long)p.second;
+				if(dist[u] != inf && dist[u] + w < dist[v]) {
+					if(i == N-1) {
 						printf("-1\n");
-						return;
+						return 0;
+					} else {
+						dist[v] = dist[u] + w;
 					}
-					q.push(v);
-					is_queue[v] = true;
 				}
 			}
 		}
 	}
-	
-	for(int i = 2; i <= N; ++i)
-		printf("%d\n", (dist[i] == INF) ? -1 : dist[i]);
-}
 
-int main()
-{
-	input();
-	run();
+	for(int i = 2; i <= N; ++i)
+		printf("%lld\n", dist[i] == inf ? -1 : dist[i]);
+
 	return 0;
 }
