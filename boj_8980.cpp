@@ -14,7 +14,7 @@ inline bool cmp(pair<pair<int, int>, int>& p1, pair<pair<int, int>, int>& p2) {
 int main() {
     int N, C, M;
     scanf("%d %d %d", &N, &C, &M);
-    vector<pair<pair<int, int>, int> > v(N);
+    vector<pair<pair<int, int>, int> > v(M);
     for(int i = 0; i < M; ++i)
         scanf("%d %d %d", &v[i].first.first, &v[i].first.second, &v[i].second);
 
@@ -26,7 +26,18 @@ int main() {
         int src = v[i].first.first;
         int dest = v[i].first.second;
         int weight = v[i].second;
+
+        int mx = -1;
+        for(int j = src; j < dest; ++j)
+            mx = (mx < capacity[j] ? capacity[j] : mx);
+        int load = min(C - mx, weight);
+
+        sum += load;
+        for(int j = src; j < dest; ++j)
+            capacity[j] += load; 
     }    
+
+    printf("%d\n", sum);
 
     return 0;
 }
