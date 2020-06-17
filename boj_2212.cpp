@@ -12,9 +12,20 @@ int main() {
 
     sort(v.begin(), v.end());
 
+    int sum = 0;
     vector<int> diff(N-1);
-    for(int i = 0; i < N-1; ++i)
+    for(int i = 0; i < N-1; ++i) {
         diff[i] = v[i+1] - v[i];
+        sum += diff[i];
+    }
+
+    sort(diff.begin(), diff.end());
+
+    K--;
+    for(int i = N-2; i >= 0 && K--; --i)
+        sum -= diff[i];
+
+    printf("%d\n", sum);
 
     return 0;
 }
