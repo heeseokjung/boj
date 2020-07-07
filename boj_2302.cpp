@@ -5,7 +5,7 @@ using namespace std;
 int main() {
     int N, M;
     scanf("%d %d", &N, &M);
-    vector<int> is_fixed(M+1, 0);
+    vector<int> is_fixed(N+1, 0);
     for(int i = 0; i < M; ++i) {
         int x;
         scanf("%d", &x);
@@ -23,9 +23,6 @@ int main() {
     }
 
     printf("%d\n", dp[N][0] + dp[N][1]);
-
-    for(int i = 1; i <= N; ++i)
-        printf("dp[%d][%d]: %d dp[%d][%d]: %d\n", i, 0, dp[i][0], i, 1, dp[i][1]);
 
     return 0;
 }
