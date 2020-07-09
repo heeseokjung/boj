@@ -4,6 +4,10 @@
 #include <cmath>
 using namespace std;
 
+inline double get_dist(pair<double, double>& p1, pair<double, double>& p2) {
+    return sqrt((p1.first-p2.first)*(p1.first-p2.first) + (p1.second-p2.second)*(p1.second-p2.second));
+}
+
 int main() {
     int N;
     scanf("%d", &N);
@@ -11,27 +15,24 @@ int main() {
     for(int i = 0; i < N; ++i)
         scanf("%lf %lf", &v[i].first, &v[i].second);
 
-    double x_sum = 0.0, y_sum = 0.0;
+    int mn_idx;
+    double mn = 100000.0;
     for(int i = 0; i < N; ++i) {
-        x_sum += v[i].first;
-        y_sum += v[i].second;
-    }
-    
-    double x = 0.0, y = -1.0;
-    double mx = 0.0, mn = 10000000.0;
-    for(int i = 0; i < N; ++i) {
-        double sum = (x-v[i].first)*(x-v[i].first) + (y-v[i].second)*(y-v[i].second);
-        double dist = sqrt(sum);
-        if(dist > mx)
-            mx = dist;
-        if(dist < mn)
-            mn = dist;
+        double mx = 0.0;
+        for(int j = 0; j < N; ++j) {
+            if(i == j)
+                continue;
+            double dist = get_dist(v[i], v[j]);
+            if(mx < dist)
+                mx = dist;
+        }
+        if(mx < mn) {
+            mn = mx;
+            mn_idx = i;
+        }
     }
 
-    double avr = (mx + mn)/2.0;
-    double ans = 2.0 * sqrt(2);
-
-    printf("myanswer: %f answer: %f\n", avr, ans);
+    printf("%f %f\n", v[mn_idx].first, v[mn_idx].second);
     
     return 0;
 }
