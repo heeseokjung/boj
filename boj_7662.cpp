@@ -12,10 +12,10 @@ int main() {
     while(TC--) {
         int k;
         cin >> k;
-        map<int, int> m;
-        priority_queue<int> min_pq, max_pq;
+        map<long long, int> m;
+        priority_queue<long long> max_pq, min_pq;
         for(int i = 0; i < k; ++i) {
-            int n;
+            long long n;
             string cmd;
             cin >> cmd >> n;
             
@@ -32,7 +32,7 @@ int main() {
                     continue;
                 if(n == 1) {
                     while(!max_pq.empty()) {
-                        int x = max_pq.top();
+                        long long x = max_pq.top();
                         max_pq.pop();
                         auto it = m.find(x);
                         if(it != m.end()) {
@@ -45,7 +45,7 @@ int main() {
                     }
                 } else if(n == -1) {
                     while(!min_pq.empty()) {
-                        int x = -min_pq.top();
+                        long long x = -min_pq.top();
                         min_pq.pop();
                         auto it = m.find(x);
                         if(it != m.end()) {
@@ -58,6 +58,21 @@ int main() {
                     }
                 }
             }
+        }
+
+        while(!max_pq.empty()) {
+            long long x = max_pq.top();
+            if(m.find(x) != m.end())
+                break;
+            else
+                max_pq.pop();
+        }
+        while(!min_pq.empty()) {
+            long long x = -min_pq.top();
+            if(m.find(x) != m.end())
+                break;
+            else
+                min_pq.pop();
         }
 
         if(m.size() == 0)
