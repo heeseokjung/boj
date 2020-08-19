@@ -5,16 +5,18 @@
 using namespace std;
 
 int N, M, X;
-int dist[1001][1001];
+int dist[1001];
+int dist_prime[1001];
 const int inf = (int)1e9;
-vector<pair<int, int> > adj[10001];
+vector<pair<int, int> > adj[1001];
+vector<pair<int, int> > adj_copy[1001];
 
-void shortest_path(int src) {
+void shortest_path(int src, int* dist) {
     for(int i = 1; i <= N; ++i)
-        dist[src][i] = inf;
+        dist[i] = inf;
 
     priority_queue<pair<int, int> > pq;
-    dist[src][src] = 0;
+    dist[src] = 0;
     pq.push({0, src});
 
     while(!pq.empty()) {
@@ -22,16 +24,16 @@ void shortest_path(int src) {
         int u = pq.top().second;
         pq.pop();
 
-        if(dist[src][u] < d)
+        if(dist[u] < d)
             continue;
 
         int size = (int)adj[u].size();
         for(int i = 0; i < size; ++i) {
             int v = adj[u][i].first;
             int w = adj[u][i].second;
-            if(dist[src][u] + w < dist[src][v]) {
-                dist[src][v] = dist[src][u] + w;
-                pq.push({dist[src][u] + w, v});
+            if(dist[u] + w < dist[v]) {
+                dist[v] = dist[u] + w;
+                pq.push({dist[u] + w, v});
             }
         }
     }
@@ -45,13 +47,27 @@ int main() {
         adj[u].push_back({v, w});
     }
 
-    for(int i = 1; i <= N; ++i)
-        shortest_path(i);
+    shortest_path(X, dist);
+
+    for(int i = 1; i <= N; ++i) {
+        adj_copy[i] = adj[i];
+        adj[i].clear();
+    }
+    for(int i = 1; i <= N; ++i) {
+        for(int j = 0; j < (int)adj_copy[i].size(); ++j) {
+            int u = i;
+            int v = adj_copy[i][j].first;
+            int w = adj_copy[i][j].second;
+            adj[v].push_back({u, w});
+        }
+    }
+
+    shortest_path(X, dist_prime);
 
     int max_dist = -1;
     for(int i = 1; i <= N; ++i) {
-        if(dist[i][X] + dist[X][i] > max_dist)
-            max_dist = dist[i][X] + dist[X][i];
+        if(dist[i] + dist_prime[i] > max_dist)
+            max_dist = dist[i] + dist_prime[i];
     }
 
     printf("%d\n", max_dist);
